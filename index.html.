@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fish World</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+
+  /* Moving ocean background */
+  .ocean {
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: url('https://i.imgur.com/0Z8FQ0S.jpeg');
+    background-size: cover;
+    animation: drift 40s linear infinite;
+    z-index: -2;
+  }
+
+  @keyframes drift {
+    from { transform: translate(0,0); }
+    to { transform: translate(-20%, -20%); }
+  }
+
+  /* Interactive fish */
+  .fish {
+    position: absolute;
+    width: 120px;
+    transition: transform 0.2s;
+    pointer-events: none;
+  }
+
+  /* Info buttons */
+  .menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.5);
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .menu button {
+    display: block;
+    margin: 6px 0;
+    padding: 10px 14px;
+    background: #1e90ff;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .menu button:hover {
+    background: #63b3ff;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="ocean"></div>
+
+<!-- Buttons that open new tabs -->
+<div class="menu">
+  <button onclick="openFish('clownfish')">Clownfish</button>
+  <button onclick="openFish('shark')">Sharks</button>
+  <button onclick="openFish('salmon')">Salmon</button>
+</div>
+
+<!-- Cartoon fish images -->
+<img src="https://i.imgur.com/5QFQYwT.png" class="fish" id="fish1">
+<img src="https://i.imgur.com/5QFQYwT.png" class="fish" id="fish2">
+<img src="https://i.imgur.com/5QFQYwT.png" class="fish" id="fish3">
+
+<script>
+  // Make fish follow the mouse
+  document.addEventListener("mousemove", function(e) {
+    document.getElementById("fish1").style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    document.getElementById("fish2").style.transform = `translate(${e.clientX - 150}px, ${e.clientY + 80}px)`;
+    document.getElementById("fish3").style.transform = `translate(${e.clientX + 120}px, ${e.clientY - 60}px)`;
+  });
+
+  // Open info pages in new tabs
+  function openFish(type) {
+    if (type === "clownfish") {
+      window.open("https://en.wikipedia.org/wiki/Clownfish", "_blank");
+    }
+    if (type === "shark") {
+      window.open("https://en.wikipedia.org/wiki/Shark", "_blank");
+    }
+    if (type === "salmon") {
+      window.open("https://en.wikipedia.org/wiki/Salmon", "_blank");
+    }
+  }
+</script>
+
+</body>
+</html>
